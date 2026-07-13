@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Link Scanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="wrap">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-glyph">&gt;_</span>
+        <div>
+          <div class="brand-title">LINK SCANNER</div>
+          <div class="brand-sub">offline heuristic scan · no external calls · no data leaves this machine</div>
+        </div>
+      </div>
+    </header>
+
+    <form id="scan-form" class="scan-bar" autocomplete="off">
+      <span class="prompt">scan&gt;</span>
+      <input
+        id="url-input"
+        type="text"
+        placeholder="paste a link, e.g. http://secure-paypal-update.tk/verify.exe"
+        spellcheck="false"
+      />
+      <button type="submit" id="run-btn">RUN</button>
+    </form>
+    <div id="error-msg" class="error-msg" hidden></div>
+
+    <section id="results" class="results" hidden>
+
+      <div class="summary-row">
+        <div class="gauge-card">
+          <svg viewBox="0 0 160 160" class="gauge">
+            <circle cx="80" cy="80" r="70" class="gauge-track"></circle>
+            <circle cx="80" cy="80" r="70" class="gauge-fill" id="gauge-fill"></circle>
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-score" id="gauge-score">0</div>
+            <div class="gauge-label">RISK SCORE</div>
+          </div>
+        </div>
+
+        <div class="verdict-card">
+          <div class="verdict-level" id="verdict-level">—</div>
+          <div class="verdict-host" id="verdict-host"></div>
+          <div class="tag-row" id="category-tags"></div>
+        </div>
+      </div>
+
+      <div class="log-card">
+        <div class="log-header">
+          <span>SCAN LOG</span>
+          <span id="log-count" class="log-count"></span>
+        </div>
+        <div class="log-body" id="log-body"></div>
+      </div>
+
+      <p class="disclaimer">
+        Heuristic result, not a certified verdict. For high-stakes decisions, corroborate with a
+        threat-intel service before opening or executing the linked content.
+      </p>
+    </section>
+
+  </div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
